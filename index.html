@@ -1,0 +1,535 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Design Ease: UI/UX Component Library</title>
+    <!-- Load Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Configure Tailwind to use the Inter font family -->
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap');
+        body {
+            font-family: 'Inter', sans-serif;
+            scroll-behavior: smooth;
+            background-color: #f8f9fa; /* Light background */
+        }
+        /* Custom styles for the code block (optional, but makes it look nice) */
+        .code-block {
+            background-color: #1e293b; /* slate-800 */
+            color: #f1f5f9; /* slate-100 */
+            border-radius: 0.5rem;
+            padding: 1rem;
+            white-space: pre-wrap;
+            word-break: break-all;
+            position: relative;
+        }
+    </style>
+</head>
+<body class="text-gray-800">
+
+    <!-- Navigation Bar -->
+    <header class="sticky top-0 z-50 bg-white shadow-lg">
+        <nav class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex justify-between items-center">
+            <a href="#home" class="text-2xl font-bold text-indigo-600 hover:text-indigo-800 transition duration-300">DesignEase</a>
+            <div class="space-x-4">
+                <a href="#home" class="text-gray-600 hover:text-indigo-600 font-medium transition duration-300">Home</a>
+                <a href="#designs" class="text-gray-600 hover:text-indigo-600 font-medium transition duration-300">Components</a>
+            </div>
+        </nav>
+    </header>
+
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+
+        <!-- 1. Home Section -->
+        <section id="home" class="mb-20 pt-10">
+            <div class="text-center">
+                <h1 class="text-5xl md:text-6xl font-extrabold text-gray-900 mb-4">
+                    Instantly Enhance Your <span class="text-indigo-600">UI/UX</span>
+                </h1>
+                <p class="text-xl text-gray-600 max-w-3xl mx-auto mb-8">
+                    Welcome to DesignEase—your fast track to beautiful, responsive, and functional front-end components. Copy, paste, and ship faster!
+                </p>
+                <div class="flex justify-center space-x-4">
+                    <a href="#designs" class="bg-indigo-600 hover:bg-indigo-700 text-white font-semibold py-3 px-8 rounded-xl shadow-lg transition duration-300 transform hover:scale-105">
+                        Browse Components
+                    </a>
+                    <a href="#" class="bg-white border border-gray-300 text-gray-700 font-semibold py-3 px-8 rounded-xl shadow-md hover:bg-gray-50 transition duration-300 transform hover:scale-105">
+                        Learn More
+                    </a>
+                </div>
+            </div>
+
+            <div class="mt-16 grid md:grid-cols-3 gap-8">
+                <div class="bg-white p-6 rounded-xl shadow-lg border border-gray-100">
+                    <svg class="w-8 h-8 text-indigo-500 mb-3" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
+                    <h3 class="text-xl font-bold mb-2">Speed</h3>
+                    <p class="text-gray-500">Stop writing boilerplate CSS. Grab pre-styled, functional blocks in seconds.</p>
+                </div>
+                <div class="bg-white p-6 rounded-xl shadow-lg border border-gray-100">
+                    <svg class="w-8 h-8 text-indigo-500 mb-3" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.75 17L9 20l-1 1h8l-1-1-1-3m-6 0h2m-2 0h-2h2z"></path></svg>
+                    <h3 class="text-xl font-bold mb-2">Responsiveness</h3>
+                    <p class="text-gray-500">All components are fully mobile-responsive and built with Tailwind CSS utility classes.</p>
+                </div>
+                <div class="bg-white p-6 rounded-xl shadow-lg border border-gray-100">
+                    <svg class="w-8 h-8 text-indigo-500 mb-3" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4m-4-4h.01"></path></svg>
+                    <h3 class="text-xl font-bold mb-2">Clarity</h3>
+                    <p class="text-gray-500">Clean, commented, and easy-to-read code that integrates seamlessly into any project.</p>
+                </div>
+            </div>
+        </section>
+        <!-- End Home Section -->
+         <!-- 2. Designs/Components Section -->
+        <section id="designs" class="pt-20">
+            <h2 class="text-4xl font-bold text-gray-900 mb-12 border-b-2 border-indigo-200 pb-2">
+                The Component Library (<span id="component-count">11</span> UI/UX Elements)
+            </h2>
+
+            <div id="component-list" class="space-y-16">
+                <!-- Components will be dynamically generated or hardcoded here -->
+
+                <!-- Helper function to wrap component output and code -->
+                <script>
+                    /**
+                     * Renders a component block with live output, code snippet, and copy button.
+                     * @param {string} title - The component name.
+                     * @param {string} description - A brief description.
+                     * @param {string} outputHtml - The raw HTML for the live preview.
+                     * @param {string} codeHtml - The HTML/Tailwind code to be copied.
+                     */
+                    function renderComponent(title, description, outputHtml, codeHtml) {
+                        const componentId = title.toLowerCase().replace(/[^a-z0-9]/g, '-');
+                        const componentHtml = `
+                            <div class="bg-white p-6 md:p-8 rounded-xl shadow-xl hover:shadow-2xl transition duration-300 border border-indigo-100">
+                                <h3 class="text-2xl font-bold text-indigo-600 mb-3">${title}</h3>
+                                <p class="text-gray-500 mb-6">${description}</p>
+
+                                <!-- Live Preview -->
+                                <div class="p-6 border-2 border-dashed border-gray-200 bg-gray-50 rounded-lg mb-6 flex justify-center items-center min-h-[100px]">
+                                    ${outputHtml}
+                                </div>
+
+                                <!-- Code Block and Copy Button -->
+                                <div class="bg-gray-100 p-4 rounded-lg">
+                                    <div class="flex justify-between items-center mb-3">
+                                        <p class="text-sm font-semibold text-gray-700">HTML Code</p>
+                                        <button data-code-target="#code-${componentId}" class="copy-button bg-indigo-500 hover:bg-indigo-600 text-white text-sm font-semibold py-1 px-4 rounded-lg transition duration-150 transform hover:scale-105">
+                                            Copy Code
+                                        </button>
+                                    </div>
+                                    <pre id="code-${componentId}" class="code-block text-xs overflow-x-auto">
+                                        <code>${codeHtml.trim().replace(/</g, '&lt;').replace(/>/g, '&gt;')}</code>
+                                    </pre>
+                                </div>
+                            </div>
+                        `;
+                        document.getElementById('component-list').innerHTML += componentHtml;
+                    }
+
+                    // --- Component 1: Gradient Button ---
+                    renderComponent(
+                        "1. Gradient Primary Button",
+                        "A modern call-to-action button with a soft gradient and hover effect.",
+                        `
+                        <button class="bg-gradient-to-r from-purple-500 to-indigo-600 hover:from-purple-600 hover:to-indigo-700 text-white font-semibold py-2 px-6 rounded-full shadow-lg transform transition duration-300 hover:shadow-xl">
+                            Get Started Now
+                        </button>
+                        `,
+                        `
+<button class="bg-gradient-to-r from-purple-500 to-indigo-600 hover:from-purple-600 hover:to-indigo-700 text-white font-semibold py-2 px-6 rounded-full shadow-lg transform transition duration-300 hover:shadow-xl">
+    Get Started Now
+</button>
+                        `
+                    );
+                    // --- Component 2: Feature Card ---
+                    renderComponent(
+                        "2. Shadow Feature Card",
+                        "A clean card component suitable for displaying features or key information.",
+                        `
+                        <div class="max-w-xs p-6 bg-white rounded-xl shadow-lg hover:shadow-2xl transition duration-300 cursor-pointer">
+                            <div class="flex items-center space-x-4">
+                                <div class="bg-indigo-100 p-3 rounded-full">
+                                    <svg class="w-6 h-6 text-indigo-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                                </div>
+                                <h4 class="text-xl font-semibold text-gray-800">Fast Deployment</h4>
+                            </div>
+                            <p class="mt-4 text-gray-600">Use pre-built components to cut development time by up to 50%.</p>
+                        </div>
+                        `,
+                        `
+<div class="max-w-xs p-6 bg-white rounded-xl shadow-lg hover:shadow-2xl transition duration-300 cursor-pointer">
+    <div class="flex items-center space-x-4">
+        <div class="bg-indigo-100 p-3 rounded-full">
+            <!-- Icon placeholder -->
+            <svg class="w-6 h-6 text-indigo-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+        </div>
+        <h4 class="text-xl font-semibold text-gray-800">Fast Deployment</h4>
+    </div>
+    <p class="mt-4 text-gray-600">Use pre-built components to cut development time by up to 50%.</p>
+</div>
+                        `
+                    );
+
+                    // --- Component 3: Floating Label Input ---
+                    renderComponent(
+                        "3. Floating Label Input",
+                        "A modern input field where the label floats above the text when focused.",
+                        `
+                        <div class="relative w-full max-w-sm">
+                            <input type="email" id="floating_email" class="block px-2.5 pb-2.5 pt-4 w-full text-sm text-gray-900 bg-transparent rounded-lg border-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-indigo-600 peer" placeholder=" " required />
+                            <label for="floating_email" class="absolute text-sm text-gray-500 duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white px-2 peer-focus:px-2 peer-focus:text-indigo-600 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto">
+                                Email Address
+                            </label>
+                        </div>
+                        `,
+                        `
+<div class="relative w-full max-w-sm">
+    <input type="email" id="floating_email" class="block px-2.5 pb-2.5 pt-4 w-full text-sm text-gray-900 bg-transparent rounded-lg border-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-indigo-600 peer" placeholder=" " required />
+    <label for="floating_email" class="absolute text-sm text-gray-500 duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white px-2 peer-focus:px-2 peer-focus:text-indigo-600 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto">
+        Email Address
+    </label>
+</div>
+                        `
+                    );
+
+                    // --- Component 4: Pill Badges ---
+                    renderComponent(
+                        "4. Rounded Pill Badges",
+                        "Small, colorful badges for categorization and labeling.",
+                        `
+                        <div class="flex space-x-2">
+                            <span class="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-indigo-100 text-indigo-800">
+                                New Feature
+                            </span>
+                            <span class="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-green-100 text-green-800">
+                                Active
+                            </span>
+                            <span class="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-yellow-100 text-yellow-800">
+                                Beta
+                            </span>
+                        </div>
+                        `,
+                        `
+<div class="flex space-x-2">
+    <span class="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-indigo-100 text-indigo-800">
+        New Feature
+    </span>
+    <span class="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-green-100 text-green-800">
+        Active
+    </span>
+    <span class="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-yellow-100 text-yellow-800">
+        Beta
+    </span>
+</div>
+                        `
+                    );
+                    // --- Component 5: Testimonial Block ---
+                    renderComponent(
+                        "5. Testimonial Quote Block",
+                        "A stylish block for highlighting customer feedback or quotes.",
+                        `
+                        <div class="max-w-lg bg-indigo-50 p-6 rounded-xl border-l-4 border-indigo-600 shadow-md">
+                            <p class="text-gray-700 italic text-lg leading-relaxed">
+                                "DesignEase has completely transformed our workflow. The components are clean, well-documented, and incredibly easy to use. Highly recommended!"
+                            </p>
+                            <div class="mt-4 flex items-center">
+                                <img class="h-10 w-10 rounded-full object-cover mr-3" src="https://placehold.co/40x40/7c3aed/ffffff?text=JD" alt="User Avatar">
+                                <div>
+                                    <p class="font-semibold text-indigo-800">Jane Doe</p>
+                                    <p class="text-sm text-gray-500">CTO, TechCorp</p>
+                                </div>
+                            </div>
+                        </div>
+                        `,
+                        `
+<div class="max-w-lg bg-indigo-50 p-6 rounded-xl border-l-4 border-indigo-600 shadow-md">
+    <p class="text-gray-700 italic text-lg leading-relaxed">
+        "DesignEase has completely transformed our workflow. The components are clean, well-documented, and incredibly easy to use. Highly recommended!"
+    </p>
+    <div class="mt-4 flex items-center">
+        <img class="h-10 w-10 rounded-full object-cover mr-3" src="https://placehold.co/40x40/7c3aed/ffffff?text=JD" alt="User Avatar">
+        <div>
+            <p class="font-semibold text-indigo-800">Jane Doe</p>
+            <p class="text-sm text-gray-500">CTO, TechCorp</p>
+        </div>
+    </div>
+</div>
+                        `
+                    );
+
+                    // --- Component 6: Progress Bar ---
+                    renderComponent(
+                        "6. Animated Progress Bar",
+                        "Visual representation of completion or loading status.",
+                        `
+                        <div class="w-full max-w-sm">
+                            <div class="flex justify-between mb-1">
+                                <span class="text-base font-medium text-indigo-700">Profile Completion</span>
+                                <span class="text-sm font-medium text-indigo-700">75%</span>
+                            </div>
+                            <div class="w-full bg-gray-200 rounded-full h-2.5">
+                                <div class="bg-indigo-600 h-2.5 rounded-full" style="width: 75%"></div>
+                            </div>
+                        </div>
+                        `,
+                        `
+<div class="w-full max-w-sm">
+    <div class="flex justify-between mb-1">
+        <span class="text-base font-medium text-indigo-700">Profile Completion</span>
+        <span class="text-sm font-medium text-indigo-700">75%</span>
+    </div>
+    <div class="w-full bg-gray-200 rounded-full h-2.5">
+        <div class="bg-indigo-600 h-2.5 rounded-full" style="width: 75%"></div>
+    </div>
+</div>
+                        `
+                    );
+                    // --- Component 7: User Avatar Group ---
+                    renderComponent(
+                        "7. Avatar Stack Group",
+                        "A stack of user avatars for displaying team members or participants.",
+                        `
+                        <div class="flex items-center -space-x-4">
+                            <img class="inline-block h-10 w-10 rounded-full ring-2 ring-white" src="https://placehold.co/40x40/f43f5e/ffffff?text=A" alt="Avatar A">
+                            <img class="inline-block h-10 w-10 rounded-full ring-2 ring-white" src="https://placehold.co/40x40/3b82f6/ffffff?text=B" alt="Avatar B">
+                            <img class="inline-block h-10 w-10 rounded-full ring-2 ring-white" src="https://placehold.co/40x40/10b981/ffffff?text=C" alt="Avatar C">
+                            <div class="flex items-center justify-center h-10 w-10 rounded-full ring-2 ring-white bg-gray-200 text-sm font-medium text-gray-700">
+                                +5
+                            </div>
+                        </div>
+                        `,
+                        `
+<div class="flex items-center -space-x-4">
+    <img class="inline-block h-10 w-10 rounded-full ring-2 ring-white" src="https://placehold.co/40x40/f43f5e/ffffff?text=A" alt="Avatar A">
+    <img class="inline-block h-10 w-10 rounded-full ring-2 ring-white" src="https://placehold.co/40x40/3b82f6/ffffff?text=B" alt="Avatar B">
+    <img class="inline-block h-10 w-10 rounded-full ring-2 ring-white" src="https://placehold.co/40x40/10b981/ffffff?text=C" alt="Avatar C">
+    <div class="flex items-center justify-center h-10 w-10 rounded-full ring-2 ring-white bg-gray-200 text-sm font-medium text-gray-700">
+        +5
+    </div>
+</div>
+                        `
+                    );
+
+                    // --- Component 8: Notification Toast ---
+                    renderComponent(
+                        "8. Success Notification Toast",
+                        "A non-intrusive alert component for confirming actions.",
+                        `
+                        <div id="toast-success-preview" class="flex items-center w-full max-w-xs p-4 mb-4 text-gray-500 bg-white rounded-lg shadow-lg" role="alert">
+                            <div class="inline-flex items-center justify-center flex-shrink-0 w-8 h-8 text-green-500 bg-green-100 rounded-lg">
+                                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 14.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg>
+                            </div>
+                            <div class="ms-3 text-sm font-normal">Item successfully saved.</div>
+                        </div>
+                        `,
+                        `
+<div class="flex items-center w-full max-w-xs p-4 mb-4 text-gray-500 bg-white rounded-lg shadow-lg" role="alert">
+    <div class="inline-flex items-center justify-center flex-shrink-0 w-8 h-8 text-green-500 bg-green-100 rounded-lg">
+        <!-- Success Icon -->
+        <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 14.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg>
+    </div>
+    <div class="ms-3 text-sm font-normal">Item successfully saved.</div>
+</div>
+                        `
+                    );
+                    // --- Component 9: Simple Responsive Navbar (Mobile-First) ---
+                    renderComponent(
+                        "9. Simple Responsive Navbar",
+                        "A basic, responsive navigation bar suitable for small sites. (JS not included in copied code as it's for Tailwind structure).",
+                        `
+                        <nav class="w-full max-w-md bg-white border border-gray-100 rounded-lg shadow-sm">
+                            <div class="flex justify-between items-center p-3">
+                                <span class="font-bold text-indigo-600">Logo</span>
+                                <div class="hidden sm:flex space-x-4">
+                                    <a href="#" class="text-gray-600 hover:text-indigo-600">Link 1</a>
+                                    <a href="#" class="text-gray-600 hover:text-indigo-600">Link 2</a>
+                                </div>
+                                <button class="sm:hidden text-gray-500 hover:text-indigo-600">
+                                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
+                                </button>
+                            </div>
+                            <!-- Mobile Menu (requires JS toggle, included for structural example) -->
+                            <!-- <div class="hidden sm:hidden flex flex-col p-4 space-y-2 border-t">...</div> -->
+                        </nav>
+                        `,
+                        `
+<nav class="w-full bg-white border border-gray-100 rounded-lg shadow-sm">
+    <div class="flex justify-between items-center p-3">
+        <span class="font-bold text-indigo-600">Logo</span>
+        <div class="hidden sm:flex space-x-4">
+            <a href="#" class="text-gray-600 hover:text-indigo-600">Link 1</a>
+            <a href="#" class="text-gray-600 hover:text-indigo-600">Link 2</a>
+        </div>
+        <!-- Hamburger Icon for Mobile -->
+        <button class="sm:hidden text-gray-500 hover:text-indigo-600">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
+        </button>
+    </div>
+    <!-- Add JS to toggle this div on mobile -->
+    <!-- <div class="hidden flex flex-col p-4 space-y-2 border-t">
+        <a href="#" class="block text-gray-600 hover:text-indigo-600">Link 1</a>
+        <a href="#" class="block text-gray-600 hover:text-indigo-600">Link 2</a>
+    </div> -->
+</nav>
+                        `
+                    );
+
+                    // --- Component 10: Pricing/Plan Card ---
+                    renderComponent(
+                        "10. Pricing Plan Card",
+                        "A vertically centered card for displaying service tiers.",
+                        `
+                        <div class="w-full max-w-sm p-6 bg-white rounded-xl shadow-2xl text-center border-t-4 border-indigo-600">
+                            <h4 class="text-2xl font-bold mb-2 text-indigo-700">Pro Plan</h4>
+                            <p class="text-gray-500 mb-4">For growing teams.</p>
+                            <p class="text-5xl font-extrabold text-gray-900 mb-6">$49<span class="text-xl font-medium text-gray-500">/mo</span></p>
+                            <ul class="text-gray-600 space-y-2 mb-6 text-left inline-block">
+                                <li class="flex items-center"><span class="text-green-500 mr-2">&check;</span> Unlimited Projects</li>
+                                <li class="flex items-center"><span class="text-green-500 mr-2">&check;</span> 50GB Storage</li>
+                                <li class="flex items-center"><span class="text-green-500 mr-2">&check;</span> Priority Support</li>
+                            </ul>
+                            <button class="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-semibold py-3 rounded-xl transition duration-300">
+                                Choose Plan
+                            </button>
+                        </div>
+                        `,
+                        `
+<div class="w-full max-w-sm p-6 bg-white rounded-xl shadow-2xl text-center border-t-4 border-indigo-600">
+    <h4 class="text-2xl font-bold mb-2 text-indigo-700">Pro Plan</h4>
+    <p class="text-gray-500 mb-4">For growing teams.</p>
+    <p class="text-5xl font-extrabold text-gray-900 mb-6">$49<span class="text-xl font-medium text-gray-500">/mo</span></p>
+    <ul class="text-gray-600 space-y-2 mb-6 text-left inline-block">
+        <li class="flex items-center"><span class="text-green-500 mr-2">&check;</span> Unlimited Projects</li>
+        <li class="flex items-center"><span class="text-green-500 mr-2">&check;</span> 50GB Storage</li>
+        <li class="flex items-center"><span class="text-green-500 mr-2">&check;</span> Priority Support</li>
+    </ul>
+    <button class="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-semibold py-3 rounded-xl transition duration-300">
+        Choose Plan
+    </button>
+</div>
+                        `
+                    );
+                    // --- Component 11: Simple Accordion Item ---
+                    renderComponent(
+                        "11. Simple Accordion Item (Toggle)",
+                        "A collapsible section for FAQ or detailed content (requires JS toggle, included in site JS).",
+                        `
+                        <div id="accordion-item-preview" class="w-full max-w-lg border border-gray-200 rounded-xl bg-white shadow-sm">
+                            <button onclick="toggleAccordion(this)" class="flex justify-between items-center w-full p-4 text-left font-semibold text-gray-700 hover:bg-gray-50 rounded-t-xl transition duration-150">
+                                <span>What is DesignEase?</span>
+                                <svg class="w-5 h-5 transition-transform duration-300 transform" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                            </button>
+                            <div class="accordion-content max-h-0 overflow-hidden transition-all duration-500 ease-in-out">
+                                <div class="p-4 border-t border-gray-200 text-gray-600">
+                                    DesignEase is a component library providing ready-to-use HTML/Tailwind CSS snippets for rapid prototyping and development.
+                                </div>
+                            </div>
+                        </div>
+                        `,
+                        `
+<div class="w-full border border-gray-200 rounded-xl bg-white shadow-sm">
+    <!-- Add 'onclick="toggleAccordion(this)"' to the button and implement JS toggle function -->
+    <button class="flex justify-between items-center w-full p-4 text-left font-semibold text-gray-700 hover:bg-gray-50 rounded-t-xl transition duration-150">
+        <span>What is DesignEase?</span>
+        <!-- Rotate the SVG 180deg when open -->
+        <svg class="w-5 h-5 transition-transform duration-300 transform" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+    </button>
+    <div class="max-h-0 overflow-hidden transition-all duration-500 ease-in-out">
+        <div class="p-4 border-t border-gray-200 text-gray-600">
+            DesignEase is a component library providing ready-to-use HTML/Tailwind CSS snippets for rapid prototyping and development.
+        </div>
+    </div>
+</div>
+                        `
+                    );
+                </script>
+            </div>
+        </section>
+        <!-- End Designs/Components Section -->
+
+    </main>
+
+    <footer class="bg-gray-800 text-white mt-20">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 text-center">
+            <p class="text-sm">&copy; 2025 DesignEase. Built with Tailwind CSS and &#x2764;.</p>
+        </div>
+    </footer>
+
+    <script>
+        // --- JavaScript Functionality ---
+
+        /**
+         * 1. Copy Code Functionality
+         */
+        document.addEventListener('DOMContentLoaded', () => {
+            const copyButtons = document.querySelectorAll('.copy-button');
+            copyButtons.forEach(button => {
+                button.addEventListener('click', (event) => {
+                    const targetId = event.currentTarget.getAttribute('data-code-target');
+                    const codeElement = document.querySelector(targetId);
+
+                    if (codeElement && codeElement.querySelector('code')) {
+                        // Use innerText to get the content without HTML tags
+                        const codeToCopy = codeElement.querySelector('code').innerText.trim();
+
+                        // Create a temporary textarea element
+                        const tempTextArea = document.createElement('textarea');
+                        tempTextArea.value = codeToCopy;
+                        document.body.appendChild(tempTextArea);
+
+                        // Select and copy the text
+                        tempTextArea.select();
+                        document.execCommand('copy'); // Fallback for navigator.clipboard
+
+                        // Clean up
+                        document.body.removeChild(tempTextArea);
+
+                        // Provide visual feedback
+                        const originalText = event.currentTarget.textContent;
+                        event.currentTarget.textContent = 'Copied!';
+                        event.currentTarget.classList.remove('bg-indigo-500');
+                        event.currentTarget.classList.add('bg-green-500');
+
+                        setTimeout(() => {
+                            event.currentTarget.textContent = originalText;
+                            event.currentTarget.classList.remove('bg-green-500');
+                            event.currentTarget.classList.add('bg-indigo-500');
+                        }, 1500);
+                    }
+                });
+            });
+        });
+        /**
+         * 2. Accordion Toggle Functionality (for Component 11)
+         */
+        function toggleAccordion(button) {
+            const container = button.closest('.border');
+            if (!container) return;
+
+            const content = container.querySelector('.accordion-content');
+            const svg = button.querySelector('svg');
+
+            // Close all other open accordions
+            document.querySelectorAll('.accordion-content').forEach(otherContent => {
+                if (otherContent !== content && otherContent.style.maxHeight !== '0px') {
+                    otherContent.style.maxHeight = '0px';
+                    const otherButton = otherContent.previousElementSibling;
+                    if (otherButton) {
+                        otherButton.querySelector('svg').classList.remove('rotate-180');
+                    }
+                }
+            });
+
+            // Toggle the current one
+            if (content.style.maxHeight === '0px' || content.style.maxHeight === '') {
+                content.style.maxHeight = content.scrollHeight + "px";
+                svg.classList.add('rotate-180');
+            } else {
+                content.style.maxHeight = '0px';
+                svg.classList.remove('rotate-180');
+            }
+        }
+    </script>
+</body>
+
+</html>
